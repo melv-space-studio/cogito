@@ -85,7 +85,7 @@ func _physics_process(_delta):
 
 func rotate_object(_delta):
 	var input_dir
-	input_dir = Input.get_vector("left", "right", "forward", "back")
+	input_dir = Input.get_last_mouse_velocity().normalized()
 	
 	if input_dir.length() > 0:
 		var rotation_vector: Vector3 = Vector3(input_dir.y, input_dir.x, 0)
