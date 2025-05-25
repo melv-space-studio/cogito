@@ -174,6 +174,7 @@ func add_resolution_items() -> void:
 
 # Function to change window modes. Hooked up to the window_mode_option_button.
 func on_window_mode_selected(index: int) -> void:
+	if OS.is_debug_build(): return
 	match index:
 		0: #Exclusive full screen
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
@@ -189,9 +190,10 @@ func on_window_mode_selected(index: int) -> void:
 
 
 func refresh_render():
-	get_window().size = render_resolution
-	get_window().content_scale_size = render_resolution
-	get_window().scaling_3d_scale = render_scale_val
+	if not OS.is_debug_build():
+		get_window().size = render_resolution
+		get_window().content_scale_size = render_resolution
+		get_window().scaling_3d_scale = render_scale_val
 	
 	var msaa_2d = config.get_value(OptionsConstants.section_name, OptionsConstants.msaa_2d_key, 0)
 	var msaa_3d = config.get_value(OptionsConstants.section_name, OptionsConstants.msaa_3d_key, 0)
