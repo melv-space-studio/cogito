@@ -29,6 +29,7 @@ func _ready():
 
 # Function called when wieldable is unequipped.
 func equip(_player_interaction_component: PlayerInteractionComponent):
+	wieldable_mesh.show()
 	animation_player.play(anim_equip)
 	player_interaction_component = _player_interaction_component
 
@@ -36,6 +37,9 @@ func equip(_player_interaction_component: PlayerInteractionComponent):
 # Function called when wieldable is unequipped.
 func unequip():
 	animation_player.play(anim_unequip)
+	var animation = await animation_player.animation_finished
+	if animation == anim_unequip:
+		wieldable_mesh.hide()
 
 
 # Primary action called by the Player Interaction Component when flashlight is wielded.
