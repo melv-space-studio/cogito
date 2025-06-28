@@ -224,8 +224,10 @@ func unlock_door():
 
 
 func lock_door():
-	audio_stream_player_3d.stream = lock_sound
-	audio_stream_player_3d.play()
+	if audio_stream_player_3d:
+		audio_stream_player_3d.stream = lock_sound
+		audio_stream_player_3d.play()
+		
 	is_locked = true
 	lock_interaction_text = interaction_text_when_locked	
 	lock_state_updated.emit(lock_interaction_text)
@@ -233,8 +235,9 @@ func lock_door():
 
 
 func open_door(interactor: Node3D):
-	audio_stream_player_3d.stream = open_sound
-	audio_stream_player_3d.play()
+	if audio_stream_player_3d:
+		audio_stream_player_3d.stream = open_sound
+		audio_stream_player_3d.play()
 
 	if door_type == DoorType.ANIMATED:
 		anim_player.play(opening_animation)
@@ -275,8 +278,9 @@ func close_door(_interactor: Node3D):
 	if close_timer: #If there's an auto_close_timer, destroy it.
 		close_timer.queue_free()
 	
-	audio_stream_player_3d.stream = close_sound
-	audio_stream_player_3d.play()
+	if audio_stream_player_3d:
+		audio_stream_player_3d.stream = close_sound
+		audio_stream_player_3d.play()
 	
 	if door_type == DoorType.ANIMATED:
 		if reverse_opening_anim_for_close:
