@@ -1,4 +1,4 @@
-extends InteractionComponent
+class_name BasicInteractionComponent extends InteractionComponent
 
 signal basic_signal
 
